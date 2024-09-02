@@ -4,6 +4,7 @@ import useProgramCache from "../stores/useProgramCache";
 import examples from "./CodeExamples";
 import Interpreter, { InsType, outsType } from "./Interpreter";
 import Report from "./Report";
+import getBaseLink from "./getBaseLink";
 
 const report = new Report();
 const interpreter = new Interpreter();
@@ -26,17 +27,6 @@ export function interpreterInputsShow(ins: InsType) {
 
 export function interpreterOutputsShow(outs: outsType) {
   return interpreter.outputsShow(outs);
-}
-
-export function getBaseLink() {
-  if (typeof window !== "undefined") {
-    const link =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname;
-    return link;
-  } else return "";
 }
 
 export async function buildPermalink() {

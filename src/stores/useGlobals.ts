@@ -1,5 +1,5 @@
+import getBaseLink from "@/utils/getBaseLink";
 import { create } from "zustand";
-import { getBaseLink } from "../utils/helper";
 
 export enum InitializationState {
   InitializingPyodide = "Initializing Pyodide...",
@@ -8,10 +8,12 @@ export enum InitializationState {
   Initializing = "Initializing...",
   Completed = "Completed",
 }
+
 interface globalTypes {
   pyodide: any | null;
   wasm: any | null;
   isRunBtnClicked: boolean;
+  storeProgramBtnClicked: Boolean;
   sharedLink: string;
   initalizationState: InitializationState;
   initialisePyodide: (pyodidie_obj: any) => void;
@@ -20,14 +22,16 @@ interface globalTypes {
   resetRunBtnClicked: () => void;
   updateSharedLink: (updatedLink: string) => void;
   updateInitializationState: (updatedState: InitializationState) => void;
+  toggleStoreProgramBtn: () => void;
 }
 
-const useGlobals = create<globalTypes>()((set) => ({
+const useGlobals = create<globalTypes>()((set, get) => ({
   pyodide: null,
   wasm: null,
   isRunBtnClicked: false,
+  storeProgramBtnClicked: false,
   sharedLink: getBaseLink(),
-  initalizationState: InitializationState.InitializingPyodide,
+  initalizationState: InitializationState.Completed,
   initialisePyodide: (pyodide_obj) => {
     console.log("getting obj: ", pyodide_obj);
     set((state) => ({ ...state, pyodide: pyodide_obj }));
@@ -48,6 +52,10 @@ const useGlobals = create<globalTypes>()((set) => ({
   },
   updateInitializationState: (updatedState: InitializationState) => {
     set((state) => ({ ...state, initalizationState: updatedState }));
+  },
+  toggleStoreProgramBtn: () => {
+    const btnClicked = get().storeProgramBtnClicked;
+    set((state) => ({ ...state, storeProgramBtnClicked: !btnClicked }));
   },
 }));
 

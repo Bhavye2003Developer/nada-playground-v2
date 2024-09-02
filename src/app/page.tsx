@@ -14,15 +14,19 @@ import InputDisplay from "./Program/InputDisplay";
 import LoadingDisplay from "./components/LoadingDisplay";
 import ToastProvider from "./components/ToastProvider";
 import { useSearchParams } from "next/navigation";
+import StoreProgramDisplay from "./components/StoreProgramDisplay";
 
 function Platform() {
   const maxMessageDisplayHeight = (window.innerHeight * 25.0) / 100;
   const [messageHeight, setMessageHeight] = useState(maxMessageDisplayHeight);
   const searchParams = useSearchParams();
 
-  const initializationState = useGlobals((state) => state.initalizationState);
+  const [initializationState, storeProgramBtnClicked] = useGlobals((state) => [
+    state.initalizationState,
+    state.storeProgramBtnClicked,
+  ]);
 
-  useInit();
+  // useInit();
   useEffect(() => {
     const sharedValue = searchParams.get("shared");
     fetchCode(sharedValue || "");
@@ -35,12 +39,32 @@ function Platform() {
     []
   );
 
+  // useEffect(() => {
+  //   if (storeProgramBtnClicked) {
+  //     const client = NillionClient.create({
+  //       network: NamedNetwork.enum.Devnet,
+  //       overrides: async () => {
+  //         const signer = await createSignerFromKey(
+  //           "9a975f567428d054f2bf3092812e6c42f901ce07d9711bc77ee2cd81101f42c5"
+  //         );
+  //         return {
+  //           endpoint: "http://localhost:8080/nilchain",
+  //           signer,
+  //           userSeed: "example@nillion",
+  //         };
+  //       },
+  //     });
+  //     setClient(client);
+  //   }
+  // }, [storeProgramBtnClicked]);
+
   return (
     <div className="flex flex-col w-full h-screen absolute bg-gray-100 dark:bg-gray-800">
       <ToastProvider>
         <div
           className={`h-screen flex flex-1 flex-col transition-opacity duration-300 ${
-            initializationState === InitializationState.Completed
+            initializationState === InitializationState.Completed ||
+            !storeProgramBtnClicked
               ? "opacity-100"
               : "opacity-35 pointer-events-none"
           }`}
@@ -86,6 +110,11 @@ function Platform() {
         {initializationState === InitializationState.Completed ? null : (
           <LoadingDisplay />
         )}
+        {storeProgramBtnClicked ? (
+          // <NillionClientProvider client={client}>
+          <StoreProgramDisplay />
+        ) : // </NillionClientProvider>
+        null}
       </ToastProvider>
     </div>
   );
