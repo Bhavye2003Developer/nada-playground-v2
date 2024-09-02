@@ -7,7 +7,7 @@ import { lintGutter } from "@codemirror/lint";
 import useGlobals from "@/stores/useGlobals";
 import useProgramCache from "@/stores/useProgramCache";
 import { static_analysis } from "@/utils/static_analysis";
-import "../../MyEditor.css";
+import "../MyEditor.css";
 import { buildPermalink } from "@/utils/helper";
 
 function MyEditor({ messageHeight }: { messageHeight: number }) {

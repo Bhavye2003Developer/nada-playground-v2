@@ -1,6 +1,5 @@
 export const static_analysis = function (nada_code: String) {
-  const updated_nada_code =
-    `from nada_dsl import *\nfrom nada_audit import *\n` + nada_code;
+  //   const updated_nada_code = `from nada_dsl import *` + nada_code;
   return `
 import js
 from js import document
@@ -21,7 +20,7 @@ def analyse():
 
     
     source = (
-        """${updated_nada_code}"""
+        """${nada_code}"""
         .replace('&' + 'amp;', '&')
         .replace('&' + 'lt;', '<')
         .replace('&' + 'gt;', '>')

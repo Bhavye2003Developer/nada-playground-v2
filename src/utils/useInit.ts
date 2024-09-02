@@ -12,6 +12,7 @@ import useGlobals, { InitializationState } from "../stores/useGlobals";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useScript } from "usehooks-ts";
+import wasmInitialiser from "./nada_run";
 
 const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 
@@ -41,14 +42,16 @@ function initWindowProperties() {
 const PYODIDE_VERSION = "0.26.2";
 
 async function useInit() {
-  const [pyodide, setPyodide] = useState<any>(null)
+  const [pyodide, setPyodide] = useState<any>(null);
   const pyodideScriptStatus = useScript(
     `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/pyodide.js`
   );
-  const [updateInitializationState, initialisePyodide] = useGlobals((state) => [
-    state.updateInitializationState,
-    state.initialisePyodide,
-  ]);
+  const [updateInitializationState, initialisePyodide, initialiseWasm] =
+    useGlobals((state) => [
+      state.updateInitializationState,
+      state.initialisePyodide,
+      state.initialiseWasm,
+    ]);
 
   useEffect(() => {
     const initializePyodide = async () => {
@@ -77,6 +80,11 @@ async function useInit() {
       initWindowProperties();
       updateInitializationState(InitializationState.Initializing);
       initialisePyodide(pyodide);
+
+      // initialise wasm
+      const wasm = await wasmInitialiser();
+      initialiseWasm(wasm);
+
       await delay(700);
       updateInitializationState(InitializationState.Completed);
       toast.success("Initialisation completed");

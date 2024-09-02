@@ -3,7 +3,6 @@ import useGlobals, { InitializationState } from "@/stores/useGlobals";
 import { fetchCode } from "@/utils/helper";
 import useInit from "@/utils/useInit";
 import { SyntheticEvent, useCallback, useEffect, useState } from "react";
-import { Flip, ToastContainer } from "react-toastify";
 import Header from "./components/Header";
 import MyEditor from "./Program/Editor";
 import MessageDisplay from "./Program/MessageDisplay";
@@ -14,18 +13,18 @@ import OutputDisplay from "./Program/OutputDisplay";
 import InputDisplay from "./Program/InputDisplay";
 import LoadingDisplay from "./components/LoadingDisplay";
 import ToastProvider from "./components/ToastProvider";
+import { useSearchParams } from "next/navigation";
 
 function Platform() {
   const maxMessageDisplayHeight = (window.innerHeight * 25.0) / 100;
   const [messageHeight, setMessageHeight] = useState(maxMessageDisplayHeight);
-  const searchParams = "";
+  const searchParams = useSearchParams();
 
   const initializationState = useGlobals((state) => state.initalizationState);
 
   useInit();
   useEffect(() => {
-    // console.log(searchParams);
-    const sharedValue = "";
+    const sharedValue = searchParams.get("shared");
     fetchCode(sharedValue || "");
   }, []);
 
