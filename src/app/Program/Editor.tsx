@@ -82,7 +82,7 @@ function MyEditor({ messageHeight }: { messageHeight: number }) {
         className="flex-1 w-full overflow-auto p-1"
         extensions={[basicSetup(), python(), lintGutter()]}
         onChange={codeChange}
-        theme="dark"
+        theme="light"
         style={{ maxHeight: divHeight ? `${divHeight}px` : "auto" }}
       />
     </div>

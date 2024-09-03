@@ -7,13 +7,15 @@ import useProgramCache from "@/stores/useProgramCache";
 import examples from "@/utils/CodeExamples";
 
 function Header() {
-  const [runBtnClicked, isRunBtnClicked, toggleStoreProgramBtn] = useGlobals(
-    (state) => [
-      state.runBtnClicked,
-      state.isRunBtnClicked,
-      state.toggleStoreProgramBtn,
-    ]
-  );
+  const [
+    runBtnClicked,
+    isRunBtnClicked,
+    // toggleStoreProgramBtn
+  ] = useGlobals((state) => [
+    state.runBtnClicked,
+    state.isRunBtnClicked,
+    // state.toggleStoreProgramBtn,
+  ]);
   const [resetProgram, setCode, resetMessages] = useProgramCache((state) => [
     state.resetProgram,
     state.setCode,
@@ -48,12 +50,12 @@ function Header() {
           ))}
         </select>
         <CodeShareBtn />
-        <button
+        {/* <button
           onClick={toggleStoreProgramBtn}
-          className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
         >
           STORE
-        </button>
+        </button> */}
         <button
           onClick={() => {
             runBtnClicked();
