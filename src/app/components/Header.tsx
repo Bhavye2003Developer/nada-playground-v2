@@ -10,10 +10,12 @@ function Header() {
   const [
     runBtnClicked,
     isRunBtnClicked,
+    toggleUploadBtn,
     // toggleStoreProgramBtn
   ] = useGlobals((state) => [
     state.runBtnClicked,
     state.isRunBtnClicked,
+    state.toggleUploadBtn,
     // state.toggleStoreProgramBtn,
   ]);
   const [resetProgram, setCode, resetMessages] = useProgramCache((state) => [
@@ -56,6 +58,12 @@ function Header() {
         >
           STORE
         </button> */}
+        <button
+          onClick={toggleUploadBtn}
+          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded shadow hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
+          UPLOAD
+        </button>
         <button
           onClick={() => {
             runBtnClicked();

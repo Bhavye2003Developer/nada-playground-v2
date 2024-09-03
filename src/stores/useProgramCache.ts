@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import examples from "../utils/CodeExamples";
 
-type Inputs = {
+export type Inputs = {
   [name: string]: {
     value: any;
     type: string;
@@ -27,6 +27,7 @@ interface PorgramState {
   resetProgram: () => void;
   addNewMessage: (message: string[]) => void;
   resetMessages: () => void;
+  overrideInputs: (inputs: Inputs) => void;
 }
 
 const useProgramCache = create<PorgramState>()((set, get) => ({
@@ -94,6 +95,9 @@ const useProgramCache = create<PorgramState>()((set, get) => ({
   resetMessages: () => {
     console.log("resetting messages");
     set((state) => ({ ...state, messages: [] }));
+  },
+  overrideInputs: (newInputs: Inputs) => {
+    set((state) => ({ ...state, inputs: newInputs }));
   },
 }));
 

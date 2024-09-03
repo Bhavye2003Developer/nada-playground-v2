@@ -16,6 +16,7 @@ interface globalTypes {
   storeProgramBtnClicked: Boolean;
   sharedLink: string;
   initalizationState: InitializationState;
+  isUploadBtnClicked: Boolean;
   initialisePyodide: (pyodidie_obj: any) => void;
   initialiseWasm: (wasm_obj: any) => void;
   runBtnClicked: () => void;
@@ -23,6 +24,7 @@ interface globalTypes {
   updateSharedLink: (updatedLink: string) => void;
   updateInitializationState: (updatedState: InitializationState) => void;
   toggleStoreProgramBtn: () => void;
+  toggleUploadBtn: () => void;
 }
 
 const useGlobals = create<globalTypes>()((set, get) => ({
@@ -30,8 +32,9 @@ const useGlobals = create<globalTypes>()((set, get) => ({
   wasm: null,
   isRunBtnClicked: false,
   storeProgramBtnClicked: false,
+  isUploadBtnClicked: false,
   sharedLink: getBaseLink(),
-  initalizationState: InitializationState.Completed,
+  initalizationState: InitializationState.InitializingPyodide,
   initialisePyodide: (pyodide_obj) => {
     console.log("getting obj: ", pyodide_obj);
     set((state) => ({ ...state, pyodide: pyodide_obj }));
@@ -56,6 +59,10 @@ const useGlobals = create<globalTypes>()((set, get) => ({
   toggleStoreProgramBtn: () => {
     const btnClicked = get().storeProgramBtnClicked;
     set((state) => ({ ...state, storeProgramBtnClicked: !btnClicked }));
+  },
+  toggleUploadBtn: () => {
+    const btnClicked = get().isUploadBtnClicked;
+    set((state) => ({ ...state, isUploadBtnClicked: !btnClicked }));
   },
 }));
 

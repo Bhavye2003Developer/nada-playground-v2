@@ -42,7 +42,6 @@ function initWindowProperties() {
 const PYODIDE_VERSION = "0.26.2";
 
 async function useInit() {
-  const [pyodide, setPyodide] = useState<any>(null);
   const pyodideScriptStatus = useScript(
     `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/pyodide.js`
   );
@@ -92,7 +91,7 @@ async function useInit() {
       console.log("setup completed");
     };
 
-    if (pyodideScriptStatus === "ready" && !pyodide) {
+    if (pyodideScriptStatus === "ready") {
       console.log("start init");
       initializePyodide();
     }

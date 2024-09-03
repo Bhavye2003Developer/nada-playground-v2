@@ -1,22 +1,4 @@
 import useGlobals from "@/stores/useGlobals";
-import { NamedNetwork } from "@nillion/client-core";
-import { NillionClient } from "@nillion/client-vms";
-import { useEffect } from "react";
-import { createSignerFromKey } from "@nillion/client-payments";
-
-const config = {
-  // if omitted defaults to Photon testnet,
-  network: NamedNetwork.enum.Devnet,
-  overrides: async () => {
-    const signer = await createSignerFromKey("payment-account-private-key");
-    return {
-      signer,
-      // webpack devserver address proxied to nilchain
-      endpoint: "http://localhost:8080/nilchain",
-      userSeed: "unique-user-seed",
-    };
-  },
-};
 
 // yet to be implemented after client-ts bug fixes
 
@@ -24,11 +6,6 @@ const StoreProgramDisplay = () => {
   const toggleStoreProgramBtn = useGlobals(
     (state) => state.toggleStoreProgramBtn
   );
-
-  useEffect(() => {
-    const client = NillionClient.create(config);
-    console.log("client inside storeprogram: ", client);
-  }, []);
 
   return (
     <div
