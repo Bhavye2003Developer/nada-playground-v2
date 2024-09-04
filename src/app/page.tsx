@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation";
 import UploadModal from "./components/UploadModal";
 
 function Platform() {
-  const maxMessageDisplayHeight = (window.innerHeight * 25.0) / 100;
+  const [maxMessageDisplayHeight, setMaxMessageDisplayHeight] = useState(0);
   const [messageHeight, setMessageHeight] = useState(maxMessageDisplayHeight);
   const searchParams = useSearchParams();
 
@@ -35,6 +35,10 @@ function Platform() {
 
   useInit();
   useEffect(() => {
+    if (window) {
+      const maxMessageDisplayHeight = (window.innerHeight * 25.0) / 100;
+      setMaxMessageDisplayHeight(maxMessageDisplayHeight);
+    }
     const sharedValue = searchParams.get("shared");
     fetchCode(sharedValue || "");
   }, []);

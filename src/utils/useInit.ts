@@ -10,7 +10,7 @@ import {
 } from "./helper";
 import useGlobals, { InitializationState } from "../stores/useGlobals";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useScript } from "usehooks-ts";
 import wasmInitialiser from "./nada_run";
 
