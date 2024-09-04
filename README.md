@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nada Sandbox
 
-## Getting Started
+Nada Sandbox is a browser-based interactive development environment for authoring, sharing, and simulating Nada programs.
 
-First, run the development server:
+## Features
+- **Interactive Code Editor:** Built with CodeMirror, providing a responsive interface.
+- **Run Nada Code:** Execute Nada programs directly in the browser using Pyodide and WebAssembly (WASM).
+- **Program Info:** Get detailed information on whether your program ran successfully or encountered errors.
+- **Dynamic UI:** The interface dynamically adjusts to provide an optimal user experience.
+- **Code Sharing:** Easily share your Nada code with others via unique URLs.
+- **Preloaded Examples:** Start testing Nada programs immediately with preloaded examples.
+- **No Backend Required:** The entire application is implemented as a static webpage without the need for a backend server, ensuring fast load times and easy hosting.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Dependencies and Implementation
+- **Next.js:** Used for server-side rendering and optimized builds.
+- **WebAssembly (WASM):** Utilized for compiling and executing Nada programs in the browser.
+- **Pyodide:** Executes Python code directly in the browser, enabling Nada program simulations.
+- **Zustand:** Lightweight state management library used for managing the application's state.
+- **TypeScript:** Ensures strict type checking for improved code quality and maintainability.
+- **CodeMirror:** Provides the interactive code editor.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run Nada playground locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+    https://github.com/Bhavye2003Developer/nada-playground-v2
+    cd nada-playground-v2
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install the dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Start the development server:
 
-## Deploy on Vercel
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Open your browser and navigate to http://localhost:5173 to start coding and running Nada programs!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Note
+
+This website is best viewed in dark mode.
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request if you have any ideas, bug reports, or improvements.
+
+## License
+This project is licensed under the MIT License.
