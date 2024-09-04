@@ -1,3 +1,5 @@
+"use client";
+
 import useGlobals from "@/stores/useGlobals";
 import { useState } from "react";
 import { fetchCodeFile } from "../actions/fetchFile";
@@ -6,7 +8,10 @@ import { toast } from "react-toastify";
 import YAML from "yaml";
 
 const UploadModal = () => {
-  const toggleUploadBtn = useGlobals((state) => state.toggleUploadBtn);
+  const [toggleUploadBtn, lightThemeEnabled] = useGlobals((state) => [
+    state.toggleUploadBtn,
+    state.lightThemeEnabled,
+  ]);
   const [setCode, overrideInputs] = useProgramCache((state) => [
     state.setCode,
     state.overrideInputs,
@@ -41,8 +46,13 @@ const UploadModal = () => {
         if (response.status === 200) {
           updater(response.data);
           toast.success(`${fileType} uploaded successfully`);
+          // Clear input field after successful upload
+          if (fileType === "Nada Program") {
+            setGithubCodeURL("");
+          } else {
+            setGithubInputsURL("");
+          }
         } else {
-          console.error("Error: ", response);
           toast.error(`${fileType} not found or GitHub URL is not valid`);
         }
       } catch (error) {
@@ -60,16 +70,32 @@ const UploadModal = () => {
       id="upload-modal"
       tabIndex={-1}
       aria-hidden="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto bg-opacity-50"
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto bg-opacity-50 ${
+        lightThemeEnabled ? "bg-gray-200" : "bg-opacity-50"
+      }`}
     >
-      <div className="relative w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-            Upload Your Program and Test File
+      <div
+        className={`relative w-full max-w-2xl p-6 rounded-lg shadow-lg ${
+          lightThemeEnabled
+            ? "bg-white text-gray-900"
+            : "bg-gray-800 text-white"
+        }`}
+      >
+        <div
+          className={`flex items-center justify-between pb-4 mb-4 border-b ${
+            lightThemeEnabled ? "border-gray-200" : "border-gray-700"
+          }`}
+        >
+          <h3 className="text-xl font-bold">
+            Upload Your Nada Program and Inputs File
           </h3>
           <button
             type="button"
-            className="inline-flex items-center justify-center w-8 h-8 text-gray-500 bg-transparent rounded-lg hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+            className={`inline-flex items-center justify-center w-8 h-8 rounded-lg ${
+              lightThemeEnabled
+                ? "text-gray-500 bg-transparent hover:text-gray-900 hover:bg-gray-200"
+                : "text-gray-500 bg-transparent hover:text-white hover:bg-gray-700"
+            }`}
             onClick={toggleUploadBtn}
             aria-label="Close modal"
           >
@@ -93,8 +119,13 @@ const UploadModal = () => {
           <div className="flex">
             <input
               type="url"
-              className="w-full p-2 text-base border rounded-l-md border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full p-2 text-base border rounded-l-md ${
+                lightThemeEnabled
+                  ? "border-gray-300 bg-white text-gray-900"
+                  : "border-gray-600 bg-gray-700 text-white"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Nada Program file URL"
+              value={githubCodeURL}
               onChange={(e) => setGithubCodeURL(e.target.value)}
             />
             <button
@@ -115,8 +146,13 @@ const UploadModal = () => {
           <div className="flex">
             <input
               type="url"
-              className="w-full p-2 text-base border rounded-l-md border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full p-2 text-base border rounded-l-md ${
+                lightThemeEnabled
+                  ? "border-gray-300 bg-white text-gray-900"
+                  : "border-gray-600 bg-gray-700 text-white"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Nada Inputs file URL"
+              value={githubInputsURL}
               onChange={(e) => setGithubInputsURL(e.target.value)}
             />
             <button
@@ -136,6 +172,7 @@ const UploadModal = () => {
                         );
                         overrideInputs(newInputs);
                         toast.success("Nada Inputs uploaded successfully");
+                        setGithubInputsURL(""); // Clear input field after successful upload
                       } else {
                         toast.error("Nada Inputs not valid");
                       }

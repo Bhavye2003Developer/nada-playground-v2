@@ -29,11 +29,13 @@ function MyEditor({ messageHeight }: { messageHeight: number }) {
     state.code,
     state.setCode,
   ]);
-  const [pyodide, isRunBtnClicked, resetRunBtnClicked] = useGlobals((state) => [
-    state.pyodide,
-    state.isRunBtnClicked,
-    state.resetRunBtnClicked,
-  ]);
+  const [pyodide, isRunBtnClicked, resetRunBtnClicked, lightThemeEnabled] =
+    useGlobals((state) => [
+      state.pyodide,
+      state.isRunBtnClicked,
+      state.resetRunBtnClicked,
+      state.lightThemeEnabled,
+    ]);
 
   const codeChange = (code: string) => {
     setCode(code || "");
@@ -74,13 +76,20 @@ function MyEditor({ messageHeight }: { messageHeight: number }) {
   ]);
 
   return (
-    <div className="h-full w-full flex flex-col" ref={divRef}>
+    <div
+      className={`h-full w-full flex flex-col ${
+        lightThemeEnabled ? "bg-gray-100" : "bg-gray-800"
+      }`}
+      ref={divRef}
+    >
       <ReactCodeMirror
         value={code}
-        className="flex-1 w-full overflow-auto p-1"
+        className={`flex-1 w-full overflow-auto p-1 ${
+          lightThemeEnabled ? "text-gray-900" : "text-gray-100"
+        }`}
         extensions={[basicSetup(), python(), lintGutter()]}
         onChange={codeChange}
-        theme="light"
+        theme={lightThemeEnabled ? "light" : "dark"}
         style={{ maxHeight: divHeight ? `${divHeight}px` : "auto" }}
       />
     </div>

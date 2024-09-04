@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import DisplayPanel from "../components/DisplayPanel";
 import useProgramCache from "@/stores/useProgramCache";
+import useGlobals from "@/stores/useGlobals";
 
 type MessageColorType = {
   [messageCls: string]: string;
@@ -17,10 +18,17 @@ const messageColors: MessageColorType = {
 
 function MessageDisplay() {
   const messages = useProgramCache((state) => state.messages);
+  const [lightThemeEnabled] = useGlobals((state) => [state.lightThemeEnabled]);
 
   return (
     <DisplayPanel name="Program Info">
-      <div className="p-4 space-y-2">
+      <div
+        className={`p-4 space-y-2 ${
+          lightThemeEnabled
+            ? "bg-white text-gray-900"
+            : "bg-gray-900 text-gray-100"
+        }`}
+      >
         {messages.length > 0 ? (
           messages.map((message, index) => {
             const [cls, txt] = message;
@@ -31,14 +39,26 @@ function MessageDisplay() {
                 className={`flex items-start space-x-2 ${colorClass}`}
               >
                 {cls !== "Information" && (
-                  <span className="font-semibold">{cls}:</span>
+                  <span
+                    className={`font-semibold ${
+                      lightThemeEnabled ? "text-gray-900" : "text-gray-100"
+                    }`}
+                  >
+                    {cls}:
+                  </span>
                 )}
                 <span>{txt}</span>
               </div>
             );
           })
         ) : (
-          <p className="text-gray-500">No messages</p>
+          <p
+            className={`text-gray-500 ${
+              lightThemeEnabled ? "text-gray-600" : "text-gray-400"
+            }`}
+          >
+            No messages
+          </p>
         )}
       </div>
     </DisplayPanel>

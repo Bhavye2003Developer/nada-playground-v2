@@ -21,12 +21,17 @@ function Platform() {
   const [messageHeight, setMessageHeight] = useState(maxMessageDisplayHeight);
   const searchParams = useSearchParams();
 
-  const [initializationState, storeProgramBtnClicked, isUploadBtnClicked] =
-    useGlobals((state) => [
-      state.initalizationState,
-      state.storeProgramBtnClicked,
-      state.isUploadBtnClicked,
-    ]);
+  const [
+    initializationState,
+    storeProgramBtnClicked,
+    isUploadBtnClicked,
+    lightThemeEnabled,
+  ] = useGlobals((state) => [
+    state.initalizationState,
+    state.storeProgramBtnClicked,
+    state.isUploadBtnClicked,
+    state.lightThemeEnabled,
+  ]);
 
   useInit();
   useEffect(() => {
@@ -42,7 +47,11 @@ function Platform() {
   );
 
   return (
-    <div className="flex flex-col w-full h-screen absolute bg-gray-100 dark:bg-gray-800">
+    <div
+      className={`flex flex-col w-full h-screen absolute ${
+        lightThemeEnabled ? "bg-gray-100" : "bg-gray-800"
+      }`}
+    >
       <ToastProvider>
         <div
           className={`h-screen flex flex-1 flex-col transition-opacity duration-300 ${
@@ -54,14 +63,20 @@ function Platform() {
           }`}
         >
           <Header />
-          <div className="flex h-screen mb-3 mx-2 overflow-hidden space-x-2">
+          <div
+            className={`flex h-screen mb-3 mx-2 overflow-hidden space-x-2 ${
+              lightThemeEnabled ? "bg-gray-100" : "bg-gray-900"
+            }`}
+          >
             {/* Left Side: Editor and Message Display */}
-            <div className="w-2/3 flex flex-col h-full space-y-2">
+            <div className={`w-2/3 flex flex-col h-full space-y-2`}>
               <div
                 style={{
                   height: `calc(100% - ${messageHeight}px)`,
                 }}
-                className="flex-1 bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden"
+                className={`flex-1 ${
+                  lightThemeEnabled ? "bg-white" : "bg-gray-900"
+                } shadow-lg rounded-lg overflow-hidden`}
               >
                 <MyEditor messageHeight={messageHeight} />
               </div>
@@ -73,17 +88,27 @@ function Platform() {
                 minConstraints={[Infinity, 100]}
                 maxConstraints={[Infinity, maxMessageDisplayHeight]}
                 onResize={onResize}
-                className="flex flex-col bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden"
+                className={`flex flex-col ${
+                  lightThemeEnabled ? "bg-white" : "bg-gray-900"
+                } shadow-lg rounded-lg overflow-hidden`}
               >
                 <MessageDisplay />
               </ResizableBox>
             </div>
             {/* Right Side: Input and Output Display */}
-            <div className="w-1/3 flex flex-col h-full space-y-2">
-              <div className="flex-1 bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+            <div className={`w-1/3 flex flex-col h-full space-y-2`}>
+              <div
+                className={`flex-1 ${
+                  lightThemeEnabled ? "bg-white" : "bg-gray-900"
+                } shadow-lg rounded-lg overflow-hidden`}
+              >
                 <InputDisplay />
               </div>
-              <div className="flex-1 bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden">
+              <div
+                className={`flex-1 ${
+                  lightThemeEnabled ? "bg-white" : "bg-gray-900"
+                } shadow-lg rounded-lg overflow-hidden`}
+              >
                 <OutputDisplay />
               </div>
             </div>
@@ -94,11 +119,6 @@ function Platform() {
         {initializationState === InitializationState.Completed ? null : (
           <LoadingDisplay />
         )}
-        {/* {storeProgramBtnClicked ? (
-          // <NillionClientProvider client={client}>
-          <StoreProgramDisplay />
-        ) : // </NillionClientProvider>
-        null} */}
         {isUploadBtnClicked ? <UploadModal /> : null}
       </ToastProvider>
     </div>

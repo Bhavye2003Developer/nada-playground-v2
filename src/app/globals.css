@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tailwind CSS for theme-specific toast styling */
+.toast-light .Toastify__toast {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text */
+  border: 1px solid #ddd; /* Light border */
+}
+
+.toast-dark .Toastify__toast {
+  background-color: #333333; /* Dark background */
+  color: #ffffff; /* Light text */
+  border: 1px solid #444; /* Dark border */
+}

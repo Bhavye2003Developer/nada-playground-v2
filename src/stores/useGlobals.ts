@@ -17,6 +17,7 @@ interface globalTypes {
   sharedLink: string;
   initalizationState: InitializationState;
   isUploadBtnClicked: Boolean;
+  lightThemeEnabled: Boolean;
   initialisePyodide: (pyodidie_obj: any) => void;
   initialiseWasm: (wasm_obj: any) => void;
   runBtnClicked: () => void;
@@ -25,6 +26,7 @@ interface globalTypes {
   updateInitializationState: (updatedState: InitializationState) => void;
   toggleStoreProgramBtn: () => void;
   toggleUploadBtn: () => void;
+  toggleTheme: () => void;
 }
 
 const useGlobals = create<globalTypes>()((set, get) => ({
@@ -33,6 +35,7 @@ const useGlobals = create<globalTypes>()((set, get) => ({
   isRunBtnClicked: false,
   storeProgramBtnClicked: false,
   isUploadBtnClicked: false,
+  lightThemeEnabled: true,
   sharedLink: getBaseLink(),
   initalizationState: InitializationState.InitializingPyodide,
   initialisePyodide: (pyodide_obj) => {
@@ -61,6 +64,10 @@ const useGlobals = create<globalTypes>()((set, get) => ({
   toggleUploadBtn: () => {
     const btnClicked = get().isUploadBtnClicked;
     set((state) => ({ ...state, isUploadBtnClicked: !btnClicked }));
+  },
+  toggleTheme: () => {
+    const theme = get().lightThemeEnabled;
+    set((state) => ({ ...state, lightThemeEnabled: !theme }));
   },
 }));
 
