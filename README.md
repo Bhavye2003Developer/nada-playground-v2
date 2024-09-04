@@ -1,6 +1,8 @@
-# Nada Sandbox
+# Nada Playground
 
-Nada Sandbox is a browser-based interactive development environment for authoring, sharing, and simulating Nada programs.
+Nada Playground is a browser-based interactive development environment for authoring, sharing, and simulating Nada programs.
+
+https://github.com/user-attachments/assets/db0cd970-c167-4932-a245-bef1f4ec7acd
 
 ## Features
 - **Interactive Code Editor:** Built with CodeMirror, providing a responsive interface.
