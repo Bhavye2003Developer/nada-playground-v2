@@ -42,7 +42,7 @@ To run Nada playground locally, follow these steps:
     npm run dev
     ```
 
-4. Open your browser and navigate to http://localhost:5173 to start coding and running Nada programs!
+4. Open your browser and navigate to http://localhost:3000 to start coding and running Nada programs!
 
 ## Note
 
