@@ -24,11 +24,6 @@ function Header() {
     state.resetMessages,
   ]);
 
-  useEffect(() => {
-    if (isRunBtnClicked) console.log("header - Executing...");
-    else console.log("header - RUN");
-  }, [isRunBtnClicked]);
-
   return (
     <header className="flex items-center justify-between px-4 bg-gray-50 dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 shadow-sm">
       <div className="flex items-center space-x-4">

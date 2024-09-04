@@ -14,7 +14,6 @@ import InputDisplay from "./Program/InputDisplay";
 import LoadingDisplay from "./components/LoadingDisplay";
 import ToastProvider from "./components/ToastProvider";
 import { useSearchParams } from "next/navigation";
-import StoreProgramDisplay from "./components/StoreProgramDisplay";
 import UploadModal from "./components/UploadModal";
 
 function Platform() {

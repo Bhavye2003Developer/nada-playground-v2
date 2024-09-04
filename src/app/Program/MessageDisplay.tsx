@@ -18,10 +18,6 @@ const messageColors: MessageColorType = {
 function MessageDisplay() {
   const messages = useProgramCache((state) => state.messages);
 
-  useEffect(() => {
-    console.log("message updated: ", messages);
-  }, [messages]);
-
   return (
     <DisplayPanel name="Program Info">
       <div className="p-4 space-y-2">

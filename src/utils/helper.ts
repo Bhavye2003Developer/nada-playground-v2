@@ -21,7 +21,6 @@ export function interpreterInputsRetrieve() {
 }
 
 export function interpreterInputsShow(ins: InsType) {
-  console.log("inputs showing...", ins);
   return interpreter.inputsShow(ins);
 }
 
@@ -30,7 +29,6 @@ export function interpreterOutputsShow(outs: outsType) {
 }
 
 export async function buildPermalink() {
-  console.log("buildPermalink called");
   const code = useProgramCache.getState().code.trim();
   const updateSharedLink = useGlobals.getState().updateSharedLink;
 
@@ -63,7 +61,6 @@ export async function buildPermalink() {
   );
   const link = getBaseLink() + "?shared=" + compressedBase64;
 
-  console.log("link: ", link);
   updateSharedLink(link);
 }
 
@@ -79,8 +76,6 @@ function b64decode(str: string) {
 
 export async function fetchCode(sharedValue: string) {
   if (sharedValue.trim()) {
-    console.log("entered");
-
     const compressed = b64decode(decodeURIComponent(sharedValue));
     const stream = new Blob([compressed], { type: "text/plain" }).stream();
     const compressedReadableStream = stream.pipeThrough(
@@ -99,6 +94,5 @@ export async function fetchCode(sharedValue: string) {
 }
 
 export function sendMessage(message: string) {
-  console.log("cur message: ", JSON.parse(message));
   addNewMessage(JSON.parse(message));
 }

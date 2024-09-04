@@ -1,5 +1,6 @@
 export const static_analysis = function (nada_code: String) {
-  //   const updated_nada_code = `from nada_dsl import *` + nada_code;
+  const updated_nada_code =
+    `from nada_dsl import *\nfrom nada_audit import *\n` + nada_code;
   return `
 import js
 from js import document
@@ -56,12 +57,14 @@ def analyse():
         exec(source, context)
         outs = context['nada_main']()
 
+        print("the outs: ", outs)
+
         if len(outs) > 0:
             inputs = js.interpreterInputsShow(
                 to_js([[i.name, i.ty_str] for i in outs[0].inputs])
             ).to_py()
 
-            print("inside try: ", inputs)
+            print("inside try static", inputs)
 
             outputs = js.interpreterOutputsShow(
                 to_js([[o.name, o.value.value] for o in outs[0].outputs])

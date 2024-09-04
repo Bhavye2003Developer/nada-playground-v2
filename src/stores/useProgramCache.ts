@@ -63,7 +63,6 @@ const useProgramCache = create<PorgramState>()((set, get) => ({
   },
 
   updateOutput: (updatedOutput) => {
-    console.log("output of updatedOutput: ", updatedOutput);
     set((state) => ({
       ...state,
       output: updatedOutput,
@@ -93,7 +92,6 @@ const useProgramCache = create<PorgramState>()((set, get) => ({
   },
 
   resetMessages: () => {
-    console.log("resetting messages");
     set((state) => ({ ...state, messages: [] }));
   },
   overrideInputs: (newInputs: Inputs) => {

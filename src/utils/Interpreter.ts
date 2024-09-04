@@ -27,13 +27,10 @@ export default class Interpreter {
       const inputElement = inputsFromScreen[inputName];
       inputs[inputName] = [inputElement.value, inputElement.type];
     });
-    console.log("inputsretrive func: ", inputs);
     return inputs;
   }
 
   getFormatedInputs(ins: InsType) {
-    console.log("inside getFormattedInputs: ", this.cache.inputs, ins);
-
     const inputs = useInputCache.getState().inputs;
     for (let i = 0; i < ins.length; ++i) {
       const name = ins[i][0];
@@ -67,24 +64,18 @@ export default class Interpreter {
   }
 
   inputsShow(ins: InsType) {
-    console.log("ins inside inputsShow: ", ins);
-
     const signature = ins.join(",");
     if (signature == this.cache.signature) {
-      console.log("The signature is same as before");
       return this.getFormatedInputs(ins);
     } else {
       this.cache.signature = signature;
     }
-
-    console.log("cache: ", this.cache);
 
     return this.getFormatedInputs(ins);
   }
 
   outputsShow(outs: outsType) {
     const output = [];
-    console.log("outs inside show: ", outs);
     for (let i = 0; i < outs.length; i++) {
       const output_name = outs[i][0];
       const output_value = outs[i][1];

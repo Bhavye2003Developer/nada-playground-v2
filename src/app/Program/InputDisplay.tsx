@@ -7,10 +7,6 @@ import { useEffect } from "react";
 export default function () {
   const inputs = useProgramCache((state) => state.inputs);
 
-  useEffect(() => {
-    console.log("inputs changed: ", inputs);
-  }, [inputs]);
-
   return (
     <DisplayPanel name="Input">
       <div className="overflow-x-auto">

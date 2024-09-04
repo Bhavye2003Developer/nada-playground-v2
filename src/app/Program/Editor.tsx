@@ -43,7 +43,6 @@ function MyEditor({ messageHeight }: { messageHeight: number }) {
   useEffect(() => {
     if (divRef.current) {
       const height = divRef.current.offsetHeight;
-      console.log("printing height: ", height);
       setDivHeight(height);
     }
   }, [messageHeight]);
@@ -60,7 +59,6 @@ function MyEditor({ messageHeight }: { messageHeight: number }) {
         resetRunBtnClicked();
       } else if (isInputChanged) {
         pyodide.runPython(static_analysis(code));
-        console.log("Input has changed now...");
         toggleInputChanged();
       }
     }

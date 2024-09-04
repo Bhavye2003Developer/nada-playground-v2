@@ -36,11 +36,9 @@ const useGlobals = create<globalTypes>()((set, get) => ({
   sharedLink: getBaseLink(),
   initalizationState: InitializationState.InitializingPyodide,
   initialisePyodide: (pyodide_obj) => {
-    console.log("getting obj: ", pyodide_obj);
     set((state) => ({ ...state, pyodide: pyodide_obj }));
   },
   initialiseWasm: (wasm_obj) => {
-    console.log("getting wasm obj: ", wasm_obj);
     set((state) => ({ ...state, wasm: wasm_obj }));
   },
   runBtnClicked: () => {

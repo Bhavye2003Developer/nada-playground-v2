@@ -8,6 +8,7 @@ const compileProgram = (program_code: string) => {
   let program_json = pyodide.runPython(
     updated_code + "\n" + "nada_compile(nada_main())"
   );
+  console.log("The program_json: ", program_json)
   return program_json;
 };
 

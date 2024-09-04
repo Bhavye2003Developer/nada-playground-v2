@@ -14,14 +14,12 @@ export async function fetchCodeFile(gitURL: string): Promise<FetchResponse> {
     const response = await axios(
       `https://raw.githubusercontent.com/${usernameAndRepo}/${branchAndPath}`
     );
-    console.log("content from file: ", response.data);
     return {
       status: response.status,
       data: response.data,
       error: null,
     };
   } catch (e: any) {
-    console.log(e.status, e.response.data);
     return {
       status: e.status,
       error: e.response.data,
