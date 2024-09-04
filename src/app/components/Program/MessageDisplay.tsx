@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import DisplayPanel from "../components/DisplayPanel";
+import DisplayPanel from "../DisplayPanel";
 import useProgramCache from "@/stores/useProgramCache";
 import useGlobals from "@/stores/useGlobals";
 

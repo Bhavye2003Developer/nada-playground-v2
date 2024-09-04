@@ -1,3 +1,5 @@
+"use client";
+
 import useGlobals, { InitializationState } from "@/stores/useGlobals";
 
 const initializationStates = [

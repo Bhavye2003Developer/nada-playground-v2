@@ -1,6 +1,6 @@
 import useProgramCache from "@/stores/useProgramCache";
 import useGlobals from "@/stores/useGlobals";
-import DisplayPanel from "../components/DisplayPanel";
+import DisplayPanel from "../DisplayPanel";
 
 export default function OutputDisplay() {
   const outputElements = useProgramCache((state) => state.output);
