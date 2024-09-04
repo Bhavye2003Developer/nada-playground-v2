@@ -5,7 +5,7 @@ import DisplayPanel from "../components/DisplayPanel";
 import { useEffect } from "react";
 import useGlobals from "@/stores/useGlobals";
 
-export default function () {
+export default function InputDisplay() {
   const inputs = useProgramCache((state) => state.inputs);
   const [lightThemeEnabled] = useGlobals((state) => [state.lightThemeEnabled]);
 
